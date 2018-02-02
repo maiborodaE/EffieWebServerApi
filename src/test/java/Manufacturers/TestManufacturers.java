@@ -1,19 +1,16 @@
 package Manufacturers;
-import groovy.lang.NonEmptySequence;
+import Settings.LoginAuth;
+import Settings.UserCredentials;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import io.restassured.response.ValidatableResponse;
 import lombok.Getter;
 import lombok.Setter;
-import org.omg.CosNaming.NamingContextPackage.NotEmpty;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.HashMap;
 import java.util.Map;
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.objectMapper;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
@@ -24,44 +21,44 @@ import static org.testng.Assert.assertTrue;
 @Setter
 
 public class TestManufacturers {
-    @BeforeClass
-    public String Login() {
-
-        Map<String, String> auth = new HashMap<>();
-//        u0.BA:
-        auth.put("userName", "u0ba2@mail.ru");
-        auth.put("password", "testPass");
-//        u5.BA
-//        auth.put("userName", "zb@stv.kharkov.com");
-//        auth.put("password", "STV_ipland_16");
-//        u9.BA:
-//        auth.put("userName", "effieadmin@komo.ua");
-//        auth.put("password", "komoadmin931");
-        String session = "";
-
-        Response r = given()
-                .contentType("application/json")
-                .body(auth)
-                .when()
-                .post(logUrl)
-                .then()
-                .statusCode(200)
-                .contentType(ContentType.JSON)
-                .log()
-                .headers()
-                .extract()
-                .response();
-
-        session = r.header("Set-Cookie");
-        return session;
-    }
+//    @BeforeClass
+//    public String Login() {
+//
+//        Map<String, String> auth = new HashMap<>();
+////        u0.BA:
+//        auth.put("userName", "u0ba2@mail.ru");
+//        auth.put("password", "testPass");
+////        u5.BA
+////        auth.put("userName", "zb@stv.kharkov.com");
+////        auth.put("password", "STV_ipland_16");
+////        u9.BA:
+////        auth.put("userName", "effieadmin@komo.ua");
+////        auth.put("password", "komoadmin931");
+//        String session = "";
+//
+//        Response r = given()
+//                .contentType("application/json")
+//                .body(auth)
+//                .when()
+//                .post(logUrl)
+//                .then()
+//                .statusCode(200)
+//                .contentType(ContentType.JSON)
+//                .log()
+//                .headers()
+//                .extract()
+//                .response();
+//
+//        session = r.header("Set-Cookie");
+//        return session;
+//    }
 
     @ParametersAreNonnullByDefault
     String manufUrl = "https://portal-test.effie.mobi/api/manufacturer";
-    String logUrl = "https://portal-test.effie.mobi/api/user/auth";
+//    String logUrl = "https://portal-test.effie.mobi/api/user/auth";
     Map<String, Object> Template = new HashMap<>();
     String randomName = UserCredentials.randomName;
-    String cookie = Login();
+    String cookie = LoginAuth.Login();
     private String newManufId = "";
     private String newManufName = "";
     private String updManufName ="";

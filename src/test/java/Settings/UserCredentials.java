@@ -1,17 +1,23 @@
-package Manufacturers;
+package Settings;
 
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import static io.restassured.RestAssured.given;
 
 @Setter
 @Getter
 public class UserCredentials {
-    public  String login = "userName";
-    public  String pswrd = "password";
+    public String login = "userName";
+    public String pswrd = "password";
 
     public String getCookies() {
         return cookies;
@@ -28,8 +34,7 @@ public class UserCredentials {
     public static Date date = new Date();
     public static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 
-    public static String randomName = dateFormat.format( date);
-
+    public static String randomName = dateFormat.format(date);
 
 
     public String getRandomName() {
@@ -47,5 +52,9 @@ public class UserCredentials {
     public void setPswrd(String pswrd) {
         this.pswrd = pswrd;
     }
-}
 
+
+
+
+
+}

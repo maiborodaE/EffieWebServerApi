@@ -1,7 +1,8 @@
-package Manufacturers;
+package Settings;
 
 import io.restassured.RestAssured;
 import io.restassured.RestAssured.*;
+import io.restassured.http.ContentType;
 import io.restassured.http.Cookie;
 import io.restassured.matcher.RestAssuredMatchers.*;
 import io.restassured.path.json.JsonPath;
@@ -22,32 +23,38 @@ import static org.hamcrest.CoreMatchers.equalTo;
 
 @Getter
 @Setter
-public class login {
+public class LoginAuth {
 
-    public static void main(String[] args) {
+    public static String Login() {
 
         Map<String, String> auth = new HashMap<>();
+        String logUrl = "https://portal-test.effie.mobi/api/user/auth";
+
+//        u0.BA:
         auth.put("userName", "u0ba2@mail.ru");
         auth.put("password", "testPass");
+//        u5.BA
+//        auth.put("userName", "zb@stv.kharkov.com");
+//        auth.put("password", "STV_ipland_16");
+//        u9.BA:
+//        auth.put("userName", "effieadmin@komo.ua");
+//        auth.put("password", "komoadmin931");
         String session = "";
 
-        Response r =  given()
+        Response r = given()
                 .contentType("application/json")
                 .body(auth)
                 .when()
-                .post("https://portal-test.effie.mobi/api/user/auth")
+                .post(logUrl)
                 .then()
+                .statusCode(200)
+                .contentType(ContentType.JSON)
                 .log()
                 .headers()
                 .extract()
                 .response();
 
         session = r.header("Set-Cookie");
-        System.out.println(session);
-
-        String ResponseString = r.asString();
-        System.out.println(ResponseString);
-        JsonPath jsonPath= new JsonPath(ResponseString);
+        return session;
     }
-
 }
