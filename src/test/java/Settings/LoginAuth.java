@@ -31,14 +31,9 @@ public class LoginAuth {
         String logUrl = "https://portal-test.effie.mobi/api/user/auth";
 
 //        u0.BA:
-        auth.put("userName", "u0ba2@mail.ru");
-        auth.put("password", "testPass");
-//        u5.BA
-//        auth.put("userName", "zb@stv.kharkov.com");
-//        auth.put("password", "STV_ipland_16");
-//        u9.BA:
-//        auth.put("userName", "effieadmin@komo.ua");
-//        auth.put("password", "komoadmin931");
+        auth.put("userName", "login");
+        auth.put("password", "pswrd");
+
         String session = "";
 
         Response r = given()
